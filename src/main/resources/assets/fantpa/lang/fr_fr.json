@@ -1,0 +1,59 @@
+{
+  "prefix.success": "&a[✔] &r",
+  "prefix.error": "&c[✘] &r",
+
+  "tpa.header": "&6==========================================",
+  "tpa.sent": "&aDemande envoyée à &e{player}&a.",
+  "tpa.received": "&e{player} &6veut se téléporter vers vous !",
+  "tpa.accept_button": "       &a[✔ Accepter]       ",
+  "tpa.deny_button": "&c[✘ Refuser]",
+  "tpa.button_separator": "",
+  "tpa.footer": "&6==========================================",
+  "tpa.accepted_delay": "&aAccepté ! Téléport dans &e{seconds} &asec...",
+  "tpa.accepted": "&aDemande acceptée : &e{player}",
+  "tpa.teleporting": "&aTéléporté vers &e{player}&a.",
+  "tpa.denied": "&aDemande de &e{player} &arefusée.",
+  "tpa.denied_by_player": "&cDemande refusée par &e{player}&c.",
+  "tpa.timeout": "&cDemande vers &e{player} &cexpirée.",
+  "tpa.timeout_target": "&cDemande de &e{player} &cexpirée.",
+  "tpa.no_request": "&cAucune demande en attente.",
+  "tpa.already_sent": "&cDemande déjà en attente !",
+  "tpa.player_offline": "&cJoueur hors ligne.",
+  "tpa.self": "&cImpossible de s'envoyer à soi-même !",
+  "tpa.failed": "&cÉchec de la téléportation.",
+
+  "tpahere.header": "&5==========================================",
+  "tpahere.sent": "&aDemande envoyée à &e{player}&a.",
+  "tpahere.received": "&e{player} &5vous demande de venir !",
+  "tpahere.already_sent": "&cDemande déjà en attente !",
+  "tpahere.self": "&cImpossible de s'envoyer à soi-même !",
+
+  "back.header": "&8==========================================",
+  "back.success": "&aTéléporté au point de mort.",
+  "back.footer": "&8==========================================",
+  "back.no_location": "&cAucun point de mort trouvé.",
+
+  "home.header": "&3==========================================",
+  "home.set": "&aRésidence &e{home} &adéfinie !",
+  "home.deleted": "&aRésidence &e{home} &asupprimée.",
+  "home.not_found": "&cRésidence &e{home} &cintrouvable.",
+  "home.teleported": "&aTéléporté à &e{home}&a.",
+  "home.footer": "&3==========================================",
+  "home.failed": "&cÉchec de la téléportation.",
+
+  "cooldown.active": "&cAttendez &e{seconds} &csec.",
+
+  "tpall.header": "&9==========================================",
+  "tpall.success": "&aTous les joueurs (&e{count}&a) téléportés.",
+  "tpall.notify": "&eAdmin &a{player} &evous a téléporté.",
+  "tpall.footer": "&9==========================================",
+
+  "fantpa.reloaded": "&aConfiguration rechargée.",
+  "fantpa.version": "&6{name} &7v{version}",
+  "fantpa.saved": "&aDonnées sauvegardées.",
+  "fantpa.set": "&a{key} &a= &e{value}&a.",
+  "fantpa.unknown_key": "&cClé inconnue. Disponible: timeout, cooldown, delay",
+
+  "no_permission": "&cPermission insuffisante.",
+  "player_only": "&cJoueurs uniquement."
+}

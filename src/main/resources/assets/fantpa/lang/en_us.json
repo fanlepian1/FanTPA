@@ -1,0 +1,59 @@
+{
+  "prefix.success": "&a[✔] &r",
+  "prefix.error": "&c[✘] &r",
+
+  "tpa.header": "&6==========================================",
+  "tpa.sent": "&aTeleport request sent to &e{player}&a. Waiting for response...",
+  "tpa.received": "&e{player} &6has requested to teleport to you!",
+  "tpa.accept_button": "       &a[✔ Accept]       ",
+  "tpa.deny_button": "&c[✘ Deny]",
+  "tpa.button_separator": "",
+  "tpa.footer": "&6==========================================",
+  "tpa.accepted_delay": "&aAccepted! Teleporting in &e{seconds} &aseconds...",
+  "tpa.accepted": "&aTeleport request accepted: &e{player}",
+  "tpa.teleporting": "&aTeleported to &e{player}&a.",
+  "tpa.denied": "&aYou denied &e{player}'s &arequest.",
+  "tpa.denied_by_player": "&cYour request was denied by &e{player}&c.",
+  "tpa.timeout": "&cYour request to &e{player} &cexpired.",
+  "tpa.timeout_target": "&cThe request from &e{player} &cexpired.",
+  "tpa.no_request": "&cNo pending request from that player.",
+  "tpa.already_sent": "&cYou already have a pending request to that player!",
+  "tpa.player_offline": "&cThat player is not online.",
+  "tpa.self": "&cYou cannot send a request to yourself!",
+  "tpa.failed": "&cTeleport failed.",
+
+  "tpahere.header": "&5==========================================",
+  "tpahere.sent": "&aTeleport-here request sent to &e{player}&a.",
+  "tpahere.received": "&e{player} &5wants you to teleport to them!",
+  "tpahere.already_sent": "&cAlready have a pending request to that player!",
+  "tpahere.self": "&cYou cannot send a request to yourself!",
+
+  "back.header": "&8==========================================",
+  "back.success": "&aTeleported to your death location.",
+  "back.footer": "&8==========================================",
+  "back.no_location": "&cNo death location found.",
+
+  "home.header": "&3==========================================",
+  "home.set": "&aHome &e{home} &aset successfully!",
+  "home.deleted": "&aHome &e{home} &adeleted.",
+  "home.not_found": "&cHome &e{home} &cnot found.",
+  "home.teleported": "&aTeleported to home &e{home}&a.",
+  "home.footer": "&3==========================================",
+  "home.failed": "&cFailed to teleport home.",
+
+  "cooldown.active": "&cPlease wait &e{seconds} &cseconds.",
+
+  "tpall.header": "&9==========================================",
+  "tpall.success": "&aAll players (&e{count}&a) teleported to you.",
+  "tpall.notify": "&eTeleported by admin &a{player}&e.",
+  "tpall.footer": "&9==========================================",
+
+  "fantpa.reloaded": "&aConfig and language files reloaded.",
+  "fantpa.version": "&6{name} &7v{version}",
+  "fantpa.saved": "&aData saved.",
+  "fantpa.set": "&aSet &e{key} &ato &e{value}&a.",
+  "fantpa.unknown_key": "&cUnknown key. Available: timeout, cooldown, delay",
+
+  "no_permission": "&cNo permission.",
+  "player_only": "&cPlayers only."
+}

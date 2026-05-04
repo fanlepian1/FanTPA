@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "fantpa",
+  "version": "${version}",
+  "name": "FanTPA",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/fantpa/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "cn.fancraft.fantpa.Fantpa"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

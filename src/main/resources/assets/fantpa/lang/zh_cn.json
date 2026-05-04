@@ -1,0 +1,59 @@
+{
+  "prefix.success": "&a[✔] &r",
+  "prefix.error": "&c[✘] &r",
+
+  "tpa.header": "&6==========================================",
+  "tpa.sent": "&a传送请求已发送给 &e{player}&a，等待回应...",
+  "tpa.received": "&e{player} &6请求传送到你身边！",
+  "tpa.accept_button": "       &a[✔ 接受]       ",
+  "tpa.deny_button": "&c[✘ 拒绝]",
+  "tpa.button_separator": "",
+  "tpa.footer": "&6==========================================",
+  "tpa.accepted_delay": "&a已接受！将在 &e{seconds} &a秒后传送...",
+  "tpa.accepted": "&a传送请求已接受: &e{player}",
+  "tpa.teleporting": "&a已传送到 &e{player}&a。",
+  "tpa.denied": "&a你拒绝了 &e{player} &a的请求。",
+  "tpa.denied_by_player": "&c你的请求被 &e{player} &c拒绝。",
+  "tpa.timeout": "&c你对 &e{player} &c的请求已过期。",
+  "tpa.timeout_target": "&c来自 &e{player} &c的请求已过期。",
+  "tpa.no_request": "&c没有来自该玩家的待处理请求。",
+  "tpa.already_sent": "&c你已经向该玩家发送了待处理请求！",
+  "tpa.player_offline": "&c该玩家不在线。",
+  "tpa.self": "&c不能向自己发送请求！",
+  "tpa.failed": "&c传送失败。",
+
+  "tpahere.header": "&5==========================================",
+  "tpahere.sent": "&a传送至此请求已发送给 &e{player}&a。",
+  "tpahere.received": "&e{player} &5请求你传送到他身边！",
+  "tpahere.already_sent": "&c已向该玩家发送了待处理请求！",
+  "tpahere.self": "&c不能向自己发送请求！",
+
+  "back.header": "&8==========================================",
+  "back.success": "&a已传送回死亡位置。",
+  "back.footer": "&8==========================================",
+  "back.no_location": "&c没有找到死亡位置。",
+
+  "home.header": "&3==========================================",
+  "home.set": "&a家园 &e{home} &a设置成功！",
+  "home.deleted": "&a家园 &e{home} &a已删除。",
+  "home.not_found": "&c家园 &e{home} &c未找到。",
+  "home.teleported": "&a已传送到家园 &e{home}&a。",
+  "home.footer": "&3==========================================",
+  "home.failed": "&c传送到家园失败。",
+
+  "cooldown.active": "&c请等待 &e{seconds} &c秒。",
+
+  "tpall.header": "&9==========================================",
+  "tpall.success": "&a所有玩家（&e{count}&a）已传送到你身边。",
+  "tpall.notify": "&e已被管理员 &a{player} &e传送。",
+  "tpall.footer": "&9==========================================",
+
+  "fantpa.reloaded": "&a配置文件和语言文件已重新加载。",
+  "fantpa.version": "&6{name} &7v{version}",
+  "fantpa.saved": "&a数据已保存。",
+  "fantpa.set": "&a已将 &e{key} &a设置为 &e{value}&a。",
+  "fantpa.unknown_key": "&c未知配置项。可选: timeout, cooldown, delay",
+
+  "no_permission": "&c没有权限。",
+  "player_only": "&c仅限玩家使用。"
+}
