@@ -1,0 +1,61 @@
+{
+  "prefix.success": "&a[✔] &r",
+  "prefix.error": "&c[✘] &r",
+
+  "tpa.header": "&6==========================================",
+  "tpa.sent": "&a已遣傳送之請於 &e{player}&a，待其應答...",
+  "tpa.received": "&e{player} &6欲傳送至君處！",
+  "tpa.accept_button": "       &a[✔ 允之]       ",
+  "tpa.deny_button": "&c[✘ 拒之]",
+  "tpa.button_separator": "",
+  "tpa.footer": "&6==========================================",
+  "tpa.accepted_delay": "&a已允！&e{seconds} &a秒後傳送...",
+  "tpa.accepted": "&a傳送之請已允：&e{player}",
+  "tpa.teleporting": "&a已傳送至 &e{player}&a。",
+  "tpa.denied": "&a君拒 &e{player} &a之請。",
+  "tpa.denied_by_player": "&c君之請為 &e{player} &c所拒。",
+  "tpa.timeout": "&c君致 &e{player} &c之請已逾時。",
+  "tpa.timeout_target": "&c&e{player} &c之請已逾時。",
+  "tpa.no_request": "&c彼無待決之請。",
+  "tpa.already_sent": "&c君已有待決之請於彼！",
+  "tpa.player_offline": "&c彼不在線。",
+  "tpa.self": "&c不可自請！",
+  "tpa.failed": "&c傳送敗。",
+
+  "tpahere.header": "&5==========================================",
+  "tpahere.sent": "&a已遣傳送至此之請於 &e{player}&a。",
+  "tpahere.received": "&e{player} &5欲君傳送至其處！",
+  "tpahere.already_sent": "&c已有待決之請於彼！",
+  "tpahere.self": "&c不可自請！",
+
+  "back.header": "&8==========================================",
+  "back.success": "&a已歸於歿處。",
+  "back.footer": "&8==========================================",
+  "back.no_location": "&c未見歿處。",
+
+  "home.header": "&3==========================================",
+  "home.set": "&a居所已定！",
+  "home.deleted": "&a居所已除。",
+  "home.not_found": "&c居所未見。",
+  "home.teleported": "&a已歸居所。",
+  "home.footer": "&3==========================================",
+  "home.failed": "&c歸居所敗。",
+
+  "cooldown.active": "&c請待 &e{seconds} &c秒。",
+
+  "tpall.header": "&9==========================================",
+  "tpall.success": "&a諸玩家（&e{count}&a）已傳送至君處。",
+  "tpall.notify": "&e為執事 &a{player} &e所傳送。",
+  "tpall.footer": "&9==========================================",
+
+  "fantpa.reloaded": "&a配置與言語檔案已重載。",
+  "fantpa.version": "&6{name} &7v{version}",
+  "fantpa.saved": "&a數據已存。",
+  "fantpa.set": "&a已置 &e{key} &a為 &e{value}&a。",
+  "fantpa.unknown_key": "&c未知之鍵。可用者：timeout, cooldown, delay",
+  "fantpa.language.set": "&a言語已定為 &e{language}&a。",
+  "fantpa.language.invalid": "&c言語無效。可用者：&e{languages}",
+
+  "no_permission": "&c無權。",
+  "player_only": "&c僅玩家可用。"
+}

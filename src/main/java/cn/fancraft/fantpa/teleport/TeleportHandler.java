@@ -136,7 +136,7 @@ public class TeleportHandler {
             if (level != null) {
                 MessageManager.send(player, "back.header");
                 if (doTeleport(player, level,
-                    deathPos.pos().getX() + 0.5, deathPos.pos().getY() + 0.05, deathPos.pos().getZ() + 0.5)) {
+                    deathPos.pos().getX() + 0.5, deathPos.pos().getY(), deathPos.pos().getZ() + 0.5)) {
                     applyCooldown(player);
                     MessageManager.sendSuccess(player, "back.success");
                     MessageManager.send(player, "back.footer");

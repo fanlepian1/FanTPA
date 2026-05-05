@@ -12,7 +12,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.lang.reflect.Type;
+import java.net.URI;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,12 +29,6 @@ public class LangManager {
     private static final Path LANG_DIR = Paths.get("config", "fantpa", "lang");
     private static final Type MAP_TYPE = new TypeToken<Map<String, String>>() {}.getType();
 
-    private static final String[] BUILTIN_LOCALES = {
-        "en_us", "zh_cn", "zh_tw", "ru_ru", "ja_jp", "ko_kr",
-        "fr_fr", "de_de", "es_es", "pt_br",
-        "it_it", "pl_pl", "tr_tr", "vi_vn", "th_th", "uk_ua"
-    };
-
     private final Map<String, Map<String, String>> localeMap = new HashMap<>();
     private Map<String, String> fallback = new HashMap<>();
 
@@ -38,31 +36,82 @@ public class LangManager {
 
     public void loadLanguages() {
         localeMap.clear();
-        fallback = loadBuiltin(getDefaultLocale());
 
         try { Files.createDirectories(LANG_DIR); }
         catch (IOException e) { LoggerUtil.error("Failed to create lang directory", e); }
 
-        for (String locale : BUILTIN_LOCALES) {
-            Path target = LANG_DIR.resolve(locale + ".json");
-            if (Files.notExists(target)) copyBuiltinToConfig(locale, target);
-        }
+        // 1. Copy builtin lang files from JAR to config/lang if missing
+        copyBuiltinsToConfig();
 
-        try {
-            for (Path file : Files.list(LANG_DIR).toList()) {
-                String name = file.getFileName().toString();
-                if (name.endsWith(".json")) {
-                    String locale = name.substring(0, name.length() - 5);
-                    try (Reader reader = Files.newBufferedReader(file, StandardCharsets.UTF_8)) {
-                        Map<String, String> map = GSON.fromJson(reader, MAP_TYPE);
-                        if (map != null) localeMap.put(locale, map);
-                    }
+        // 2. Load all .json files from config/lang
+        try (var files = Files.list(LANG_DIR)) {
+            files.filter(f -> f.toString().endsWith(".json")).forEach(f -> {
+                String locale = f.getFileName().toString().replace(".json", "");
+                try (Reader reader = Files.newBufferedReader(f, StandardCharsets.UTF_8)) {
+                    Map<String, String> map = GSON.fromJson(reader, MAP_TYPE);
+                    if (map != null) localeMap.put(locale, map);
+                } catch (IOException e) {
+                    LoggerUtil.error("Failed to load lang file: " + f, e);
                 }
-            }
-            LoggerUtil.info("Languages loaded, available: " + localeMap.keySet());
+            });
         } catch (IOException e) {
             LoggerUtil.error("Failed to scan lang directory", e);
         }
+
+        // 3. Set fallback (try config default first, then en_us)
+        String defaultLocale = getDefaultLocale();
+        fallback = localeMap.getOrDefault(defaultLocale,
+            localeMap.getOrDefault("en_us", new HashMap<>()));
+
+        LoggerUtil.info("Languages loaded (" + localeMap.size() + "): " + localeMap.keySet());
+    }
+
+    /** Copy builtin lang files from JAR to config/lang if they don't already exist there. */
+    private void copyBuiltinsToConfig() {
+        for (String locale : discoverBuiltinLocales()) {
+            Path target = LANG_DIR.resolve(locale + ".json");
+            if (Files.notExists(target)) {
+                String resourcePath = "/assets/fantpa/lang/" + locale + ".json";
+                try (InputStream in = Fantpa.class.getResourceAsStream(resourcePath)) {
+                    if (in != null) {
+                        Files.copy(in, target);
+                        LoggerUtil.info("Copied builtin lang: " + locale);
+                    }
+                } catch (IOException ignored) {}
+            }
+        }
+    }
+
+    /** Discover all builtin locale codes from the JAR's assets/fantpa/lang/ directory. */
+    private Set<String> discoverBuiltinLocales() {
+        Set<String> locales = new LinkedHashSet<>();
+        try {
+            URL url = Fantpa.class.getResource("/assets/fantpa/lang/");
+            if (url == null) return locales;
+
+            if ("jar".equals(url.getProtocol())) {
+                try (FileSystem fs = FileSystems.newFileSystem(url.toURI(), Map.of())) {
+                    Path langPath = fs.getPath("/assets/fantpa/lang/");
+                    try (var files = Files.list(langPath)) {
+                        files.filter(f -> f.toString().endsWith(".json"))
+                            .map(f -> f.getFileName().toString().replace(".json", ""))
+                            .forEach(locales::add);
+                    }
+                }
+            } else {
+                Path langPath = Paths.get(url.toURI());
+                try (var files = Files.list(langPath)) {
+                    files.filter(f -> f.toString().endsWith(".json"))
+                        .map(f -> f.getFileName().toString().replace(".json", ""))
+                        .forEach(locales::add);
+                }
+            }
+        } catch (Exception e) {
+            LoggerUtil.error("Failed to discover builtin locales, falling back to en_us only", e);
+        }
+
+        if (locales.isEmpty()) locales.add("en_us");
+        return locales;
     }
 
     public Set<String> getAvailableLocales() {
@@ -95,9 +144,9 @@ public class LangManager {
     }
 
     private String getWithLocale(String locale, String key) {
-        Map<String, String> localeMessages = localeMap.get(locale);
-        if (localeMessages != null && localeMessages.containsKey(key))
-            return localeMessages.get(key);
+        Map<String, String> messages = localeMap.get(locale);
+        if (messages != null && messages.containsKey(key))
+            return messages.get(key);
         return fallback.getOrDefault(key, key);
     }
 
@@ -110,57 +159,36 @@ public class LangManager {
     public void reload() { loadLanguages(); }
 
     /**
-     * Resolve player's language with priority:
-     * 1. Player's personal choice (via /fantpa language, stored in data.json)
-     * 2. Config file's defaultLanguage
-     * 3. Player's Minecraft client language
-     * 4. en_us fallback
+     * Resolve player's language. Each tier is checked for availability before use.
+     * Priority: personal choice > config default > client language > en_us
      */
     public static String getPlayerLocale(net.minecraft.server.level.ServerPlayer player) {
+        String locale;
+
         // 1. Player's personal choice
         try {
-            String personal = PlayerDataManager.getInstance().getLanguage(player.getUUID());
-            if (personal != null && !personal.isBlank()) return personal;
+            locale = PlayerDataManager.getInstance().getLanguage(player.getUUID());
+            if (locale != null && !locale.isBlank() && INSTANCE.localeMap.containsKey(locale))
+                return locale;
         } catch (Exception ignored) {}
 
         // 2. Config file default
         try {
-            String configLang = ConfigManager.getInstance().getConfig().defaultLanguage;
-            if (configLang != null && !configLang.isBlank()) return configLang;
+            locale = ConfigManager.getInstance().getConfig().defaultLanguage;
+            if (locale != null && !locale.isBlank() && INSTANCE.localeMap.containsKey(locale))
+                return locale;
         } catch (Exception ignored) {}
 
         // 3. Player's client language
         try {
-            String clientLang = player.clientInformation().language();
-            if (clientLang != null && !clientLang.isBlank()) return clientLang;
+            locale = player.clientInformation().language();
+            if (locale != null && !locale.isBlank() && INSTANCE.localeMap.containsKey(locale))
+                return locale;
         } catch (Exception ignored) {}
 
         // 4. Fallback
-        return "en_us";
-    }
-
-    private Map<String, String> loadBuiltin(String locale) {
-        String path = "/assets/fantpa/lang/" + locale + ".json";
-        try (InputStream in = Fantpa.class.getResourceAsStream(path)) {
-            if (in == null) {
-                if (!"en_us".equals(locale))
-                    return loadBuiltin("en_us");
-                return new HashMap<>();
-            }
-            Map<String, String> result = GSON.fromJson(new InputStreamReader(in, StandardCharsets.UTF_8), MAP_TYPE);
-            return result != null ? result : new HashMap<>();
-        } catch (IOException e) {
-            LoggerUtil.error("Failed to load builtin lang: " + path, e);
-            return new HashMap<>();
-        }
-    }
-
-    private void copyBuiltinToConfig(String locale, Path target) {
-        String path = "/assets/fantpa/lang/" + locale + ".json";
-        try (InputStream in = Fantpa.class.getResourceAsStream(path)) {
-            if (in == null) return;
-            Files.copy(in, target);
-        } catch (IOException ignored) {}
+        if (INSTANCE.localeMap.containsKey("en_us")) return "en_us";
+        return INSTANCE.localeMap.keySet().iterator().next();
     }
 
     private String replacePlaceholders(String msg, Map<String, String> placeholders) {
