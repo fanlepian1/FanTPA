@@ -4,7 +4,7 @@ A powerful Minecraft Fabric teleportation mod that provides TPA, Home, Back and 
 
 ---
 
-**[���İ汾](README_zh.md)** | [English](README.md)
+**[中文版本](README_zh.md)** | [English](README.md)
 
 ## Features
 
