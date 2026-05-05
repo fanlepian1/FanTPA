@@ -1,0 +1,59 @@
+{
+  "prefix.success": "&a[✔] &r",
+  "prefix.error": "&c[✘] &r",
+
+  "tpa.header": "&6==========================================",
+  "tpa.sent": "&aDa gui yeu cau dich chuyen den &e{player}&a. Dang cho phan hoi...",
+  "tpa.received": "&e{player} &6muon dich chuyen den ban!",
+  "tpa.accept_button": "       &a[✔ Chap nhan]       ",
+  "tpa.deny_button": "&c[✘ Tu choi]",
+  "tpa.button_separator": "",
+  "tpa.footer": "&6==========================================",
+  "tpa.accepted_delay": "&aDa chap nhan! Se dich chuyen sau &e{seconds} &agiay...",
+  "tpa.accepted": "&aDa chap nhan yeu cau: &e{player}",
+  "tpa.teleporting": "&aDa dich chuyen den &e{player}&a.",
+  "tpa.denied": "&aBan da tu choi yeu cau cua &e{player}&a.",
+  "tpa.denied_by_player": "&cYeu cau cua ban bi &e{player} &ctu choi.",
+  "tpa.timeout": "&cYeu cau den &e{player} &cda het han.",
+  "tpa.timeout_target": "&cYeu cau tu &e{player} &cda het han.",
+  "tpa.no_request": "&cKhong co yeu cau nao dang cho tu nguoi choi do.",
+  "tpa.already_sent": "&cBan da co yeu cau dang cho den nguoi choi do!",
+  "tpa.player_offline": "&cNguoi choi do khong truc tuyen.",
+  "tpa.self": "&cKhong the gui yeu cau cho chinh minh!",
+  "tpa.failed": "&cDich chuyen that bai.",
+
+  "tpahere.header": "&5==========================================",
+  "tpahere.sent": "&aDa gui yeu cau dich chuyen den day cho &e{player}&a.",
+  "tpahere.received": "&e{player} &5muon ban dich chuyen den ho!",
+  "tpahere.already_sent": "&cDa co yeu cau dang cho den nguoi choi do!",
+  "tpahere.self": "&cKhong the gui yeu cau cho chinh minh!",
+
+  "back.header": "&8==========================================",
+  "back.success": "&aDa dich chuyen den vi tri chet.",
+  "back.footer": "&8==========================================",
+  "back.no_location": "&cKhong tim thay vi tri chet.",
+
+  "home.header": "&3==========================================",
+  "home.set": "&aNha &e{home} &ada dat thanh cong!",
+  "home.deleted": "&aNha &e{home} &ada xoa.",
+  "home.not_found": "&cKhong tim thay nha &e{home}&c.",
+  "home.teleported": "&aDa dich chuyen den nha &e{home}&a.",
+  "home.footer": "&3==========================================",
+  "home.failed": "&cDich chuyen den nha that bai.",
+
+  "cooldown.active": "&cVui long doi &e{seconds} &cgiay.",
+
+  "tpall.header": "&9==========================================",
+  "tpall.success": "&aTat ca nguoi choi (&e{count}&a) da dich chuyen den ban.",
+  "tpall.notify": "&eDuoc dich chuyen boi quan tri vien &a{player}&e.",
+  "tpall.footer": "&9==========================================",
+
+  "fantpa.reloaded": "&aDa tai lai cau hinh va tep ngon ngu.",
+  "fantpa.version": "&6{name} &7v{version}",
+  "fantpa.saved": "&aDa luu du lieu.",
+  "fantpa.set": "&aDa dat &e{key} &athanh &e{value}&a.",
+  "fantpa.unknown_key": "&cKhoa khong xac dinh. Co san: timeout, cooldown, delay",
+
+  "no_permission": "&cKhong co quyen.",
+  "player_only": "&cChi danh cho nguoi choi."
+}

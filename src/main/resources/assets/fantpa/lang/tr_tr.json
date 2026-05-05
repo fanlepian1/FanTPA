@@ -1,0 +1,59 @@
+{
+  "prefix.success": "&a[✔] &r",
+  "prefix.error": "&c[✘] &r",
+
+  "tpa.header": "&6==========================================",
+  "tpa.sent": "&aIsinlanma istegi &e{player}&a adli oyuncuya gonderildi. Yanit bekleniyor...",
+  "tpa.received": "&e{player} &6sana isinlanmak istiyor!",
+  "tpa.accept_button": "       &a[✔ Kabul Et]       ",
+  "tpa.deny_button": "&c[✘ Reddet]",
+  "tpa.button_separator": "",
+  "tpa.footer": "&6==========================================",
+  "tpa.accepted_delay": "&aKabul edildi! &e{seconds} &asaniye icinde isinlaniliyor...",
+  "tpa.accepted": "&aIsinlanma istegi kabul edildi: &e{player}",
+  "tpa.teleporting": "&a&e{player} &aadli oyuncuya isinlandi.",
+  "tpa.denied": "&a&e{player} &aadli oyuncunun istegini reddettin.",
+  "tpa.denied_by_player": "&cIstegin &e{player} &ctarafindan reddedildi.",
+  "tpa.timeout": "&c&e{player} &cadli oyuncuya gonderdigin istek suresi doldu.",
+  "tpa.timeout_target": "&c&e{player} &cadli oyuncudan gelen istek suresi doldu.",
+  "tpa.no_request": "&cBu oyuncudan bekleyen bir istek yok.",
+  "tpa.already_sent": "&cBu oyuncuya zaten bekleyen bir istegin var!",
+  "tpa.player_offline": "&cBu oyuncu cevrimdisi.",
+  "tpa.self": "&cKendine istek gonderemezsin!",
+  "tpa.failed": "&cIsinlanma basarisiz.",
+
+  "tpahere.header": "&5==========================================",
+  "tpahere.sent": "&aBuraya isinlanma istegi &e{player}&a adli oyuncuya gonderildi.",
+  "tpahere.received": "&e{player} &5ona isinlanmani istiyor!",
+  "tpahere.already_sent": "&cBu oyuncuya zaten bekleyen bir istegin var!",
+  "tpahere.self": "&cKendine istek gonderemezsin!",
+
+  "back.header": "&8==========================================",
+  "back.success": "&aOlum konumuna isinlandi.",
+  "back.footer": "&8==========================================",
+  "back.no_location": "&cOlum konumu bulunamadi.",
+
+  "home.header": "&3==========================================",
+  "home.set": "&aEv &e{home} &aayarlandi!",
+  "home.deleted": "&aEv &e{home} &asilindi.",
+  "home.not_found": "&cEv &e{home} &cbulunamadi.",
+  "home.teleported": "&a&e{home} &aevine isinlandi.",
+  "home.footer": "&3==========================================",
+  "home.failed": "&cEve isinlanma basarisiz.",
+
+  "cooldown.active": "&cLutfen &e{seconds} &csaniye bekle.",
+
+  "tpall.header": "&9==========================================",
+  "tpall.success": "&aTum oyuncular (&e{count}&a) sana isinlandi.",
+  "tpall.notify": "&eYonetici &a{player} &etarafindan isinlandi.",
+  "tpall.footer": "&9==========================================",
+
+  "fantpa.reloaded": "&aYapilandirma ve dil dosyalari yeniden yuklendi.",
+  "fantpa.version": "&6{name} &7v{version}",
+  "fantpa.saved": "&aVeriler kaydedildi.",
+  "fantpa.set": "&a&e{key} &a, &e{value} &aolarak ayarlandi.",
+  "fantpa.unknown_key": "&cBilinmeyen anahtar. Kullanilabilir: timeout, cooldown, delay",
+
+  "no_permission": "&cYetkin yok.",
+  "player_only": "&cSadece oyuncular."
+}

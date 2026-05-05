@@ -1,0 +1,59 @@
+{
+  "prefix.success": "&a[✔] &r",
+  "prefix.error": "&c[✘] &r",
+
+  "tpa.header": "&6==========================================",
+  "tpa.sent": "&aRichiesta di teletrasporto inviata a &e{player}&a. In attesa di risposta...",
+  "tpa.received": "&e{player} &6ha richiesto di teletrasportarsi da te!",
+  "tpa.accept_button": "       &a[✔ Accetta]       ",
+  "tpa.deny_button": "&c[✘ Rifiuta]",
+  "tpa.button_separator": "",
+  "tpa.footer": "&6==========================================",
+  "tpa.accepted_delay": "&aAccettato! Teletrasporto tra &e{seconds} &asecondi...",
+  "tpa.accepted": "&aRichiesta accettata: &e{player}",
+  "tpa.teleporting": "&aTeletrasportato da &e{player}&a.",
+  "tpa.denied": "&aHai rifiutato la richiesta di &e{player}&a.",
+  "tpa.denied_by_player": "&cLa tua richiesta e stata rifiutata da &e{player}&c.",
+  "tpa.timeout": "&cLa tua richiesta a &e{player} &e scaduta.",
+  "tpa.timeout_target": "&cLa richiesta da &e{player} &e scaduta.",
+  "tpa.no_request": "&cNessuna richiesta in sospeso da quel giocatore.",
+  "tpa.already_sent": "&cHai gia una richiesta in sospeso per quel giocatore!",
+  "tpa.player_offline": "&cQuel giocatore non e online.",
+  "tpa.self": "&cNon puoi inviare una richiesta a te stesso!",
+  "tpa.failed": "&cTeletrasporto fallito.",
+
+  "tpahere.header": "&5==========================================",
+  "tpahere.sent": "&aRichiesta di teletrasporto qui inviata a &e{player}&a.",
+  "tpahere.received": "&e{player} &5vuole che ti teletrasporti da lui!",
+  "tpahere.already_sent": "&cHai gia una richiesta in sospeso per quel giocatore!",
+  "tpahere.self": "&cNon puoi inviare una richiesta a te stesso!",
+
+  "back.header": "&8==========================================",
+  "back.success": "&aTeletrasportato al punto di morte.",
+  "back.footer": "&8==========================================",
+  "back.no_location": "&cNessun punto di morte trovato.",
+
+  "home.header": "&3==========================================",
+  "home.set": "&aCasa &e{home} &aimpostata!",
+  "home.deleted": "&aCasa &e{home} &aeliminata.",
+  "home.not_found": "&cCasa &e{home} &cnon trovata.",
+  "home.teleported": "&aTeletrasportato a casa &e{home}&a.",
+  "home.footer": "&3==========================================",
+  "home.failed": "&cTeletrasporto a casa fallito.",
+
+  "cooldown.active": "&cAttendi &e{seconds} &csecondi.",
+
+  "tpall.header": "&9==========================================",
+  "tpall.success": "&aTutti i giocatori (&e{count}&a) teletrasportati da te.",
+  "tpall.notify": "&eTeletrasportato dall'amministratore &a{player}&e.",
+  "tpall.footer": "&9==========================================",
+
+  "fantpa.reloaded": "&aConfig e file di lingua ricaricati.",
+  "fantpa.version": "&6{name} &7v{version}",
+  "fantpa.saved": "&aDati salvati.",
+  "fantpa.set": "&aImpostato &e{key} &aa &e{value}&a.",
+  "fantpa.unknown_key": "&cChiave sconosciuta. Disponibili: timeout, cooldown, delay",
+
+  "no_permission": "&cNessun permesso.",
+  "player_only": "&cSolo giocatori."
+}

@@ -1,0 +1,59 @@
+{
+  "prefix.success": "&a[✔] &r",
+  "prefix.error": "&c[✘] &r",
+
+  "tpa.header": "&6==========================================",
+  "tpa.sent": "&aЗапит на телепортацію надіслано &e{player}&a. Очікування відповіді...",
+  "tpa.received": "&e{player} &6хоче телепортуватися до вас!",
+  "tpa.accept_button": "       &a[✔ Прийняти]       ",
+  "tpa.deny_button": "&c[✘ Відхилити]",
+  "tpa.button_separator": "",
+  "tpa.footer": "&6==========================================",
+  "tpa.accepted_delay": "&aПрийнято! Телепортація через &e{seconds} &aсекунд...",
+  "tpa.accepted": "&aЗапит прийнято: &e{player}",
+  "tpa.teleporting": "&aТелепортовано до &e{player}&a.",
+  "tpa.denied": "&aВи відхилили запит від &e{player}&a.",
+  "tpa.denied_by_player": "&cВаш запит відхилено гравцем &e{player}&c.",
+  "tpa.timeout": "&cВаш запит до &e{player} &cзакінчився.",
+  "tpa.timeout_target": "&cЗапит від &e{player} &cзакінчився.",
+  "tpa.no_request": "&cНемає очікуваного запиту від цього гравця.",
+  "tpa.already_sent": "&cУ вас уже є очікуваний запит до цього гравця!",
+  "tpa.player_offline": "&cЦей гравець не в мережі.",
+  "tpa.self": "&cНе можна надіслати запит собі!",
+  "tpa.failed": "&cПомилка телепортації.",
+
+  "tpahere.header": "&5==========================================",
+  "tpahere.sent": "&aЗапит на телепортацію сюди надіслано &e{player}&a.",
+  "tpahere.received": "&e{player} &5хоче, щоб ви телепортувалися до нього!",
+  "tpahere.already_sent": "&cУже є очікуваний запит до цього гравця!",
+  "tpahere.self": "&cНе можна надіслати запит собі!",
+
+  "back.header": "&8==========================================",
+  "back.success": "&aТелепортовано до місця смерті.",
+  "back.footer": "&8==========================================",
+  "back.no_location": "&cМісце смерті не знайдено.",
+
+  "home.header": "&3==========================================",
+  "home.set": "&aДім &e{home} &aвстановлено!",
+  "home.deleted": "&aДім &e{home} &aвидалено.",
+  "home.not_found": "&cДім &e{home} &cне знайдено.",
+  "home.teleported": "&aТелепортовано до дому &e{home}&a.",
+  "home.footer": "&3==========================================",
+  "home.failed": "&cНе вдалося телепортуватися до дому.",
+
+  "cooldown.active": "&cЗачекайте &e{seconds} &cсекунд.",
+
+  "tpall.header": "&9==========================================",
+  "tpall.success": "&aВсіх гравців (&e{count}&a) телепортовано до вас.",
+  "tpall.notify": "&eТелепортовано адміністратором &a{player}&e.",
+  "tpall.footer": "&9==========================================",
+
+  "fantpa.reloaded": "&aКонфігурацію та мовні файли перезавантажено.",
+  "fantpa.version": "&6{name} &7v{version}",
+  "fantpa.saved": "&aДані збережено.",
+  "fantpa.set": "&aВстановлено &e{key} &aна &e{value}&a.",
+  "fantpa.unknown_key": "&cНевідомий ключ. Доступні: timeout, cooldown, delay",
+
+  "no_permission": "&cНемає дозволу.",
+  "player_only": "&cТільки для гравців."
+}

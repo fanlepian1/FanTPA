@@ -1,0 +1,59 @@
+{
+  "prefix.success": "&a[✔] &r",
+  "prefix.error": "&c[✘] &r",
+
+  "tpa.header": "&6==========================================",
+  "tpa.sent": "&aสงคำขอเทเลพอรตไปยัง &e{player}&a กำลังรอการตอบกลับ...",
+  "tpa.received": "&e{player} &6ตองการเทเลพอรตมาหาคุณ!",
+  "tpa.accept_button": "       &a[✔ ยอมรับ]       ",
+  "tpa.deny_button": "&c[✘ ปฏิเสธ]",
+  "tpa.button_separator": "",
+  "tpa.footer": "&6==========================================",
+  "tpa.accepted_delay": "&aยอมรับแลว! กำลังเทเลพอรตในอีก &e{seconds} &aวินาที...",
+  "tpa.accepted": "&aยอมรับคำขอเทเลพอรต: &e{player}",
+  "tpa.teleporting": "&aเทเลพอรตไปยัง &e{player}&a แลว",
+  "tpa.denied": "&aคุณปฏิเสธคำขอของ &e{player}&a",
+  "tpa.denied_by_player": "&cคำขอของคุณถูกปฏิเสธโดย &e{player}&c",
+  "tpa.timeout": "&cคำขอไปยัง &e{player} &cหมดอายุ",
+  "tpa.timeout_target": "&cคำขอจาก &e{player} &cหมดอายุ",
+  "tpa.no_request": "&cไมมีคำขอที่รอดำเนินการจากผูเลนนั้น",
+  "tpa.already_sent": "&cคุณมีคำขอที่รอดำเนินการไปยังผูเลนนั้นแลว!",
+  "tpa.player_offline": "&cผูเลนนั้นไมออนไลน",
+  "tpa.self": "&cไมสามารถสงคำขอใหตัวเองได!",
+  "tpa.failed": "&cการเทเลพอรตลมเหลว",
+
+  "tpahere.header": "&5==========================================",
+  "tpahere.sent": "&aสงคำขอเทเลพอรตมาที่นี่ไปยัง &e{player}&a",
+  "tpahere.received": "&e{player} &5ตองการใหคุณเทเลพอรตไปหา!",
+  "tpahere.already_sent": "&cมีคำขอที่รอดำเนินการไปยังผูเลนนั้นแลว!",
+  "tpahere.self": "&cไมสามารถสงคำขอใหตัวเองได!",
+
+  "back.header": "&8==========================================",
+  "back.success": "&aเทเลพอรตไปยังตำแหนงที่ตาย",
+  "back.footer": "&8==========================================",
+  "back.no_location": "&cไมพบตำแหนงที่ตาย",
+
+  "home.header": "&3==========================================",
+  "home.set": "&aตั้งบาน &e{home} &aสำเร็จ!",
+  "home.deleted": "&aลบบาน &e{home} &aแลว",
+  "home.not_found": "&cไมพบบาน &e{home}&c",
+  "home.teleported": "&aเทเลพอรตไปยังบาน &e{home}&a",
+  "home.footer": "&3==========================================",
+  "home.failed": "&cเทเลพอรตไปบานลมเหลว",
+
+  "cooldown.active": "&cกรุณารอ &e{seconds} &cวินาที",
+
+  "tpall.header": "&9==========================================",
+  "tpall.success": "&aผูเลนทั้งหมด (&e{count}&a) ถูกเทเลพอรตมาหาคุณ",
+  "tpall.notify": "&eถูกเทเลพอรตโดยผูดูแล &a{player}&e",
+  "tpall.footer": "&9==========================================",
+
+  "fantpa.reloaded": "&aโหลดการตั้งคาและไฟลภาษาใหมแลว",
+  "fantpa.version": "&6{name} &7v{version}",
+  "fantpa.saved": "&aบันทึกขอมูลแลว",
+  "fantpa.set": "&aตั้งคา &e{key} &aเปน &e{value}&a",
+  "fantpa.unknown_key": "&cคียที่ไมรูจัก มีใหใช: timeout, cooldown, delay",
+
+  "no_permission": "&cไมมีสิทธิ์",
+  "player_only": "&cสำหรับผูเลนเทานั้น"
+}
