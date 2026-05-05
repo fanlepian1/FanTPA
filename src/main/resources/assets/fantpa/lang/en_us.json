@@ -34,10 +34,10 @@
   "back.no_location": "&cNo death location found.",
 
   "home.header": "&3==========================================",
-  "home.set": "&aHome &e{home} &aset successfully!",
-  "home.deleted": "&aHome &e{home} &adeleted.",
-  "home.not_found": "&cHome &e{home} &cnot found.",
-  "home.teleported": "&aTeleported to home &e{home}&a.",
+  "home.set": "&aHome set successfully!",
+  "home.deleted": "&aHome deleted.",
+  "home.not_found": "&cNo home found.",
+  "home.teleported": "&aTeleported to home.",
   "home.footer": "&3==========================================",
   "home.failed": "&cFailed to teleport home.",
 
@@ -53,6 +53,8 @@
   "fantpa.saved": "&aData saved.",
   "fantpa.set": "&aSet &e{key} &ato &e{value}&a.",
   "fantpa.unknown_key": "&cUnknown key. Available: timeout, cooldown, delay",
+  "fantpa.language.set": "&aLanguage set to &e{language}&a.",
+  "fantpa.language.invalid": "&cInvalid language. Available: &e{languages}",
 
   "no_permission": "&cNo permission.",
   "player_only": "&cPlayers only."

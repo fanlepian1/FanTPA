@@ -1,11 +1,10 @@
 {
   "prefix.success": "&a[✔] &r",
   "prefix.error": "&c[✘] &r",
-
   "tpa.header": "&6==========================================",
   "tpa.sent": "&aPedido enviado para &e{player}&a.",
   "tpa.received": "&e{player} &6quer se teleportar até você!",
-  "tpa.accept_button": "       &a[✔ Aceitar]       ",
+  "tpa.accept_button": "    &a[✔ Aceitar]",
   "tpa.deny_button": "&c[✘ Negar]",
   "tpa.button_separator": "",
   "tpa.footer": "&6==========================================",
@@ -21,39 +20,34 @@
   "tpa.player_offline": "&cJogador offline.",
   "tpa.self": "&cNão pode enviar para si mesmo!",
   "tpa.failed": "&cFalha no teleporte.",
-
   "tpahere.header": "&5==========================================",
   "tpahere.sent": "&aPedido enviado para &e{player}&a.",
   "tpahere.received": "&e{player} &5quer que você vá até ele!",
   "tpahere.already_sent": "&cJá tem um pedido pendente!",
   "tpahere.self": "&cNão pode enviar para si mesmo!",
-
   "back.header": "&8==========================================",
   "back.success": "&aTeleportado ao ponto de morte.",
   "back.footer": "&8==========================================",
   "back.no_location": "&cPonto de morte não encontrado.",
-
   "home.header": "&3==========================================",
-  "home.set": "&aLar &e{home} &adefinido!",
-  "home.deleted": "&aLar &e{home} &aremovido.",
-  "home.not_found": "&cLar &e{home} &cnão encontrado.",
-  "home.teleported": "&aTeleportado para &e{home}&a.",
+  "home.set": "&aLar definido!",
+  "home.deleted": "&aLar removido.",
+  "home.not_found": "&cLar não encontrado.",
+  "home.teleported": "&aTeleportado para o lar.",
   "home.footer": "&3==========================================",
   "home.failed": "&cFalha ao teleportar.",
-
   "cooldown.active": "&cAguarde &e{seconds} &cseg.",
-
   "tpall.header": "&9==========================================",
   "tpall.success": "&aTodos (&e{count}&a) teleportados.",
   "tpall.notify": "&eAdmin &a{player} &ete teleportou.",
   "tpall.footer": "&9==========================================",
-
   "fantpa.reloaded": "&aConfiguração recarregada.",
   "fantpa.version": "&6{name} &7v{version}",
   "fantpa.saved": "&aDados salvos.",
   "fantpa.set": "&a{key} &a= &e{value}&a.",
   "fantpa.unknown_key": "&cChave desconhecida: timeout, cooldown, delay",
-
+  "fantpa.language.set": "&aIdioma definido para &e{language}&a.",
+  "fantpa.language.invalid": "&cIdioma invalido. Disponiveis: &e{languages}",
   "no_permission": "&cSem permissão.",
   "player_only": "&cApenas jogadores."
 }

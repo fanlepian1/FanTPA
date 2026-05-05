@@ -1,11 +1,10 @@
 {
   "prefix.success": "&a[✔] &r",
   "prefix.error": "&c[✘] &r",
-
   "tpa.header": "&6==========================================",
   "tpa.sent": "&aWyslano prosbe o teleportacje do &e{player}&a. Oczekiwanie na odpowiedz...",
   "tpa.received": "&e{player} &6chce sie do ciebie przeteleportowac!",
-  "tpa.accept_button": "       &a[✔ Akceptuj]       ",
+  "tpa.accept_button": "    &a[✔ Akceptuj]",
   "tpa.deny_button": "&c[✘ Odrzuc]",
   "tpa.button_separator": "",
   "tpa.footer": "&6==========================================",
@@ -21,39 +20,34 @@
   "tpa.player_offline": "&cTen gracz jest offline.",
   "tpa.self": "&cNie mozesz wyslac prosby do siebie!",
   "tpa.failed": "&cTeleportacja nieudana.",
-
   "tpahere.header": "&5==========================================",
   "tpahere.sent": "&aWyslano prosbe o teleportacje tutaj do &e{player}&a.",
   "tpahere.received": "&e{player} &5chce abys sie do niego przeteleportowal!",
   "tpahere.already_sent": "&cMasz juz oczekujaca prosbe do tego gracza!",
   "tpahere.self": "&cNie mozesz wyslac prosby do siebie!",
-
   "back.header": "&8==========================================",
   "back.success": "&aPrzeteleportowano do miejsca smierci.",
   "back.footer": "&8==========================================",
   "back.no_location": "&cNie znaleziono miejsca smierci.",
-
   "home.header": "&3==========================================",
-  "home.set": "&aDom &e{home} &austawiony!",
-  "home.deleted": "&aDom &e{home} &ausuniety.",
-  "home.not_found": "&cDom &e{home} &cnie znaleziony.",
-  "home.teleported": "&aPrzeteleportowano do domu &e{home}&a.",
+  "home.set": "&aDom ustawiony!",
+  "home.deleted": "&aDom usunięty.",
+  "home.not_found": "&cDom nie znaleziony.",
+  "home.teleported": "&aPrzeteleportowano do domu.",
   "home.footer": "&3==========================================",
   "home.failed": "&cNie udalo sie przeteleportowac do domu.",
-
   "cooldown.active": "&cPoczekaj &e{seconds} &csekund.",
-
   "tpall.header": "&9==========================================",
   "tpall.success": "&aWszyscy gracze (&e{count}&a) przeteleportowani do ciebie.",
   "tpall.notify": "&ePrzeteleportowany przez administratora &a{player}&e.",
   "tpall.footer": "&9==========================================",
-
   "fantpa.reloaded": "&aKonfiguracja i pliki jezykowe przeladowane.",
   "fantpa.version": "&6{name} &7v{version}",
   "fantpa.saved": "&aDane zapisane.",
   "fantpa.set": "&aUstawiono &e{key} &ana &e{value}&a.",
   "fantpa.unknown_key": "&cNieznany klucz. Dostepne: timeout, cooldown, delay",
-
+  "fantpa.language.set": "&aJezyk ustawiony na &e{language}&a.",
+  "fantpa.language.invalid": "&cNieprawidlowy jezyk. Dostepne: &e{languages}",
   "no_permission": "&cBrak uprawnien.",
   "player_only": "&cTylko dla graczy."
 }

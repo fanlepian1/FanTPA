@@ -1,11 +1,10 @@
 {
   "prefix.success": "&a[✔] &r",
   "prefix.error": "&c[✘] &r",
-
   "tpa.header": "&6==========================================",
   "tpa.sent": "&aЗапрос отправлен &e{player}&a.",
   "tpa.received": "&e{player} &6хочет телепортироваться к вам!",
-  "tpa.accept_button": "       &a[✔ Принять]       ",
+  "tpa.accept_button": "    &a[✔ Принять]",
   "tpa.deny_button": "&c[✘ Отклонить]",
   "tpa.button_separator": "",
   "tpa.footer": "&6==========================================",
@@ -21,39 +20,34 @@
   "tpa.player_offline": "&cИгрок не в сети.",
   "tpa.self": "&cНельзя отправить запрос себе!",
   "tpa.failed": "&cОшибка телепортации.",
-
   "tpahere.header": "&5==========================================",
   "tpahere.sent": "&aЗапрос отправлен &e{player}&a.",
   "tpahere.received": "&e{player} &5приглашает вас к себе!",
   "tpahere.already_sent": "&cУже есть ожидающий запрос!",
   "tpahere.self": "&cНельзя отправить запрос себе!",
-
   "back.header": "&8==========================================",
   "back.success": "&aТелепортированы на место смерти.",
   "back.footer": "&8==========================================",
   "back.no_location": "&cМесто смерти не найдено.",
-
   "home.header": "&3==========================================",
-  "home.set": "&aДом &e{home} &aустановлен!",
-  "home.deleted": "&aДом &e{home} &aудалён.",
-  "home.not_found": "&cДом &e{home} &cне найден.",
-  "home.teleported": "&aТелепортация домой &e{home}&a.",
+  "home.set": "&aДом установлен!",
+  "home.deleted": "&aДом удалён.",
+  "home.not_found": "&cДом не найден.",
+  "home.teleported": "&aТелепортировано домой.",
   "home.footer": "&3==========================================",
   "home.failed": "&cНе удалось телепортироваться домой.",
-
   "cooldown.active": "&cПодождите &e{seconds} &cсек.",
-
   "tpall.header": "&9==========================================",
   "tpall.success": "&aВсе игроки (&e{count}&a) телепортированы.",
   "tpall.notify": "&eАдмин &a{player} &eтелепортировал вас.",
   "tpall.footer": "&9==========================================",
-
   "fantpa.reloaded": "&aКонфигурация перезагружена.",
   "fantpa.version": "&6{name} &7v{version}",
   "fantpa.saved": "&aДанные сохранены.",
   "fantpa.set": "&a{key} &a= &e{value}&a.",
   "fantpa.unknown_key": "&cНеизвестный ключ. Доступно: timeout, cooldown, delay",
-
+  "fantpa.language.set": "&aЯзык изменен на &e{language}&a.",
+  "fantpa.language.invalid": "&cНеверный язык. Доступные: &e{languages}",
   "no_permission": "&cНет прав.",
   "player_only": "&cТолько для игроков."
 }

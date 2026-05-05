@@ -1,11 +1,10 @@
 {
   "prefix.success": "&a[✔] &r",
   "prefix.error": "&c[✘] &r",
-
   "tpa.header": "&6==========================================",
   "tpa.sent": "&aSolicitud enviada a &e{player}&a.",
   "tpa.received": "&e{player} &6quiere teletransportarse a ti!",
-  "tpa.accept_button": "       &a[✔ Aceptar]       ",
+  "tpa.accept_button": "    &a[✔ Aceptar]",
   "tpa.deny_button": "&c[✘ Rechazar]",
   "tpa.button_separator": "",
   "tpa.footer": "&6==========================================",
@@ -21,39 +20,34 @@
   "tpa.player_offline": "&cJugador no está en línea.",
   "tpa.self": "&cNo puedes enviarte a ti mismo!",
   "tpa.failed": "&cFalló el teletransporte.",
-
   "tpahere.header": "&5==========================================",
   "tpahere.sent": "&aSolicitud enviada a &e{player}&a.",
   "tpahere.received": "&e{player} &5quiere que vayas a él!",
   "tpahere.already_sent": "&cYa tienes una solicitud pendiente!",
   "tpahere.self": "&cNo puedes enviarte a ti mismo!",
-
   "back.header": "&8==========================================",
   "back.success": "&aTeletransportado al punto de muerte.",
   "back.footer": "&8==========================================",
   "back.no_location": "&cNo se encontró punto de muerte.",
-
   "home.header": "&3==========================================",
-  "home.set": "&aHogar &e{home} &aestablecido!",
-  "home.deleted": "&aHogar &e{home} &aeliminado.",
-  "home.not_found": "&cHogar &e{home} &cno encontrado.",
-  "home.teleported": "&aTeletransportado a &e{home}&a.",
+  "home.set": "&aHogar establecido!",
+  "home.deleted": "&aHogar eliminado.",
+  "home.not_found": "&cHogar no encontrado.",
+  "home.teleported": "&aTeletransportado al hogar.",
   "home.footer": "&3==========================================",
   "home.failed": "&cFalló el teletransporte.",
-
   "cooldown.active": "&cEspera &e{seconds} &cseg.",
-
   "tpall.header": "&9==========================================",
   "tpall.success": "&aTodos (&e{count}&a) teletransportados.",
   "tpall.notify": "&eAdmin &a{player} &ete ha teletransportado.",
   "tpall.footer": "&9==========================================",
-
   "fantpa.reloaded": "&aConfiguración recargada.",
   "fantpa.version": "&6{name} &7v{version}",
   "fantpa.saved": "&aDatos guardados.",
   "fantpa.set": "&a{key} &a= &e{value}&a.",
   "fantpa.unknown_key": "&cClave desconocida: timeout, cooldown, delay",
-
+  "fantpa.language.set": "&aIdioma establecido a &e{language}&a.",
+  "fantpa.language.invalid": "&cIdioma no valido. Disponibles: &e{languages}",
   "no_permission": "&cSin permiso.",
   "player_only": "&cSolo para jugadores."
 }

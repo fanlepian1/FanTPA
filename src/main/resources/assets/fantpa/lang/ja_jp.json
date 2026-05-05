@@ -1,11 +1,10 @@
 {
   "prefix.success": "&a[✔] &r",
   "prefix.error": "&c[✘] &r",
-
   "tpa.header": "&6==========================================",
   "tpa.sent": "&a{player} &eにリクエストを送信しました。",
   "tpa.received": "&e{player} &6がテレポートを希望しています！",
-  "tpa.accept_button": "       &a[✔ 承諾]       ",
+  "tpa.accept_button": "    &a[✔ 承諾]    ",
   "tpa.deny_button": "&c[✘ 拒否]",
   "tpa.button_separator": "",
   "tpa.footer": "&6==========================================",
@@ -21,39 +20,34 @@
   "tpa.player_offline": "&cオフラインです。",
   "tpa.self": "&c自分自身には送れません！",
   "tpa.failed": "&cテレポート失敗。",
-
   "tpahere.header": "&5==========================================",
   "tpahere.sent": "&a{player} &eにリクエストを送信しました。",
   "tpahere.received": "&e{player} &5があなたを呼んでいます！",
   "tpahere.already_sent": "&c既にリクエストを送信しています！",
   "tpahere.self": "&c自分自身には送れません！",
-
   "back.header": "&8==========================================",
   "back.success": "&a死亡地点にテレポートしました。",
   "back.footer": "&8==========================================",
   "back.no_location": "&c死亡地点が見つかりません。",
-
   "home.header": "&3==========================================",
-  "home.set": "&aホーム &e{home} &a設定！",
-  "home.deleted": "&aホーム &e{home} &a削除。",
-  "home.not_found": "&cホーム &e{home} &cなし。",
-  "home.teleported": "&aホーム &e{home}&a にテレポート。",
+  "home.set": "&aホーム設定完了！",
+  "home.deleted": "&aホーム削除。",
+  "home.not_found": "&cホームなし。",
+  "home.teleported": "&aホームにテレポート。",
   "home.footer": "&3==========================================",
   "home.failed": "&cホームへのテレポート失敗。",
-
   "cooldown.active": "&c{seconds} &c秒お待ちください。",
-
   "tpall.header": "&9==========================================",
   "tpall.success": "&a全プレイヤー(&e{count}&a人)テレポート。",
   "tpall.notify": "&e管理者 &a{player} &eがテレポート。",
   "tpall.footer": "&9==========================================",
-
   "fantpa.reloaded": "&a設定再読み込み完了。",
   "fantpa.version": "&6{name} &7v{version}",
   "fantpa.saved": "&aデータ保存完了。",
   "fantpa.set": "&a{key} &a= &e{value}&a。",
   "fantpa.unknown_key": "&c不明なキー。使用可能: timeout, cooldown, delay",
-
+  "fantpa.language.set": "&a言語を &e{language} &aに設定しました。",
+  "fantpa.language.invalid": "&c無効な言語です。利用可能: &e{languages}",
   "no_permission": "&c権限がありません。",
   "player_only": "&cプレイヤーのみ。"
 }

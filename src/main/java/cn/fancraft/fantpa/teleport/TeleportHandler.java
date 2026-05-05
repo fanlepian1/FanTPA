@@ -5,44 +5,32 @@ import cn.fancraft.fantpa.event.EventManager;
 import cn.fancraft.fantpa.event.TeleportEvents;
 import cn.fancraft.fantpa.message.MessageManager;
 import cn.fancraft.fantpa.utils.LoggerUtil;
+import cn.fancraft.fantpa.utils.PlayerDataManager;
 import cn.fancraft.fantpa.utils.PlayerManager;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.*;
 
 public class TeleportHandler {
 
     private static final TeleportHandler INSTANCE = new TeleportHandler();
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    private static final Path HOMES_FILE = Paths.get("config", "fantpa", "data", "homes.json");
-    private static final Type HOMES_TYPE = new TypeToken<Map<String, Map<String, HomeData>>>() {}.getType();
 
     private final Map<UUID, TeleportRequest> pendingRequests = new ConcurrentHashMap<>();
     private final Map<UUID, Long> cooldowns = new ConcurrentHashMap<>();
-    private final Map<UUID, Map<String, HomeData>> homes = new ConcurrentHashMap<>();
     private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
     private MinecraftServer server;
 
     public Map<UUID, TeleportRequest> pendingRequests() { return Collections.unmodifiableMap(pendingRequests); }
     public static TeleportHandler getInstance() { return INSTANCE; }
 
-    public void init(MinecraftServer server) { this.server = server; loadHomes(); startTimeoutChecker(); }
-    public void shutdown() { saveHomes(); scheduler.shutdown(); }
+    public void init(MinecraftServer server) { this.server = server; startTimeoutChecker(); }
+    public void shutdown() { scheduler.shutdown(); }
 
-    // ==================== 底层传送 ====================
+    // ==================== Teleport ====================
 
     private static boolean doTeleport(ServerPlayer player, ServerPlayer target) {
         return player.teleportTo((ServerLevel) target.level(),
@@ -163,40 +151,33 @@ public class TeleportHandler {
 
     // ==================== Home ====================
 
-    public boolean setHome(ServerPlayer player, String homeName) {
-        String name = homeName != null ? homeName : "home";
-        homes.computeIfAbsent(player.getUUID(), k -> new LinkedHashMap<>()).put(name, new HomeData(player));
-        saveHomes();
+    public boolean setHome(ServerPlayer player) {
+        PlayerDataManager.getInstance().setHome(player.getUUID(), player);
+        PlayerDataManager.getInstance().save();
         MessageManager.send(player, "home.header");
-        MessageManager.sendSuccess(player, "home.set", Map.of("home", name));
+        MessageManager.sendSuccess(player, "home.set");
         MessageManager.send(player, "home.footer");
-        EventManager.getInstance().fireAsync(new TeleportEvents.HomeEvent(player, name, TeleportEvents.HomeEvent.Type.SET));
+        EventManager.getInstance().fireAsync(new TeleportEvents.HomeEvent(player, "home", TeleportEvents.HomeEvent.Type.SET));
         return true;
     }
 
-    public boolean deleteHome(ServerPlayer player, String homeName) {
-        Map<String, HomeData> ph = homes.get(player.getUUID());
-        String name = homeName != null ? homeName : "home";
-        if (ph == null || !ph.containsKey(name)) {
-            MessageManager.sendError(player, "home.not_found", Map.of("home", name));
+    public boolean deleteHome(ServerPlayer player) {
+        if (PlayerDataManager.getInstance().getHome(player.getUUID()) == null) {
+            MessageManager.sendError(player, "home.not_found");
             return false;
         }
-        ph.remove(name);
-        saveHomes();
+        PlayerDataManager.getInstance().deleteHome(player.getUUID());
+        PlayerDataManager.getInstance().save();
         MessageManager.send(player, "home.header");
-        MessageManager.sendSuccess(player, "home.deleted", Map.of("home", name));
+        MessageManager.sendSuccess(player, "home.deleted");
         MessageManager.send(player, "home.footer");
         return true;
     }
 
-    public boolean home(ServerPlayer player, String homeName) {
+    public boolean home(ServerPlayer player) {
         if (!checkCooldown(player)) return false;
-        Map<String, HomeData> ph = homes.get(player.getUUID());
-        String name = homeName != null ? homeName : "home";
-        if (ph == null || ph.isEmpty()) return setHome(player, name);
-
-        HomeData h = ph.get(name);
-        if (h == null) { MessageManager.sendError(player, "home.not_found", Map.of("home", name)); return false; }
+        PlayerDataManager.HomeData h = PlayerDataManager.getInstance().getHome(player.getUUID());
+        if (h == null) return setHome(player);
 
         GlobalPos pos = h.toGlobalPos(server);
         if (pos == null) { MessageManager.sendError(player, "home.failed"); return false; }
@@ -207,16 +188,16 @@ public class TeleportHandler {
         MessageManager.send(player, "home.header");
         if (doTeleport(player, level, pos.pos().getX() + 0.5, pos.pos().getY(), pos.pos().getZ() + 0.5)) {
             applyCooldown(player);
-            MessageManager.sendSuccess(player, "home.teleported", Map.of("home", name));
+            MessageManager.sendSuccess(player, "home.teleported");
             MessageManager.send(player, "home.footer");
-            EventManager.getInstance().fireAsync(new TeleportEvents.HomeEvent(player, name, TeleportEvents.HomeEvent.Type.TELEPORT));
+            EventManager.getInstance().fireAsync(new TeleportEvents.HomeEvent(player, "home", TeleportEvents.HomeEvent.Type.TELEPORT));
             return true;
         }
         MessageManager.sendError(player, "home.failed");
         return false;
     }
 
-    // ==================== 管理员 ====================
+    // ==================== Admin ====================
 
     public boolean tpAll(ServerPlayer admin) {
         MessageManager.send(admin, "tpall.header");
@@ -232,7 +213,7 @@ public class TeleportHandler {
         return true;
     }
 
-    // ==================== 辅助 ====================
+    // ==================== Helpers ====================
 
     private boolean checkCooldown(ServerPlayer player) {
         Long last = cooldowns.get(player.getUUID());
@@ -270,40 +251,5 @@ public class TeleportHandler {
                 }
             }
         }, 1, 1, TimeUnit.SECONDS);
-    }
-
-    private void loadHomes() {
-        try {
-            Files.createDirectories(HOMES_FILE.getParent());
-            if (Files.exists(HOMES_FILE)) {
-                Map<String, Map<String, HomeData>> loaded = GSON.fromJson(Files.readString(HOMES_FILE), HOMES_TYPE);
-                if (loaded != null)
-                    for (var e : loaded.entrySet())
-                        try { homes.put(UUID.fromString(e.getKey()), e.getValue()); } catch (IllegalArgumentException ignored) {}
-                LoggerUtil.info("家园数据已加载: " + homes.size() + " 个玩家");
-            }
-        } catch (IOException e) { LoggerUtil.error("家园数据加载失败", e); }
-    }
-
-    public void saveHomes() {
-        try { Files.createDirectories(HOMES_FILE.getParent()); Files.writeString(HOMES_FILE, GSON.toJson(homes)); }
-        catch (IOException e) { LoggerUtil.error("家园数据保存失败", e); }
-    }
-
-    public static class HomeData {
-        private String dimension;
-        private int x, y, z;
-        public HomeData() {}
-        public HomeData(ServerPlayer player) {
-            this.dimension = ((ServerLevel) player.level()).dimension().toString();
-            BlockPos pos = player.blockPosition();
-            this.x = pos.getX(); this.y = pos.getY(); this.z = pos.getZ();
-        }
-        public GlobalPos toGlobalPos(MinecraftServer server) {
-            for (ServerLevel level : server.getAllLevels())
-                if (level.dimension().toString().equals(dimension))
-                    return GlobalPos.of(level.dimension(), new BlockPos(x, y, z));
-            return null;
-        }
     }
 }

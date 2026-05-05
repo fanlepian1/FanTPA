@@ -1,11 +1,10 @@
 {
   "prefix.success": "&a[✔] &r",
   "prefix.error": "&c[✘] &r",
-
   "tpa.header": "&6==========================================",
   "tpa.sent": "&a{player} &e에게 요청을 보냈습니다.",
   "tpa.received": "&e{player} &6님이 텔레포트를 요청했습니다!",
-  "tpa.accept_button": "       &a[✔ 수락]       ",
+  "tpa.accept_button": "    &a[✔ 수락]    ",
   "tpa.deny_button": "&c[✘ 거절]",
   "tpa.button_separator": "",
   "tpa.footer": "&6==========================================",
@@ -21,39 +20,34 @@
   "tpa.player_offline": "&c오프라인입니다.",
   "tpa.self": "&c자신에게 보낼 수 없습니다!",
   "tpa.failed": "&c텔레포트 실패.",
-
   "tpahere.header": "&5==========================================",
   "tpahere.sent": "&a{player} &e에게 요청을 보냈습니다.",
   "tpahere.received": "&e{player} &5님이 당신을 부르고 있습니다!",
   "tpahere.already_sent": "&c이미 요청을 보냈습니다!",
   "tpahere.self": "&c자신에게 보낼 수 없습니다!",
-
   "back.header": "&8==========================================",
   "back.success": "&a사망 지점으로 텔레포트했습니다.",
   "back.footer": "&8==========================================",
   "back.no_location": "&c사망 지점을 찾을 수 없습니다.",
-
   "home.header": "&3==========================================",
-  "home.set": "&a홈 &e{home} &a설정 완료!",
-  "home.deleted": "&a홈 &e{home} &a삭제됨.",
-  "home.not_found": "&c홈 &e{home} &c찾을 수 없음.",
-  "home.teleported": "&a홈 &e{home}&a(으)로 텔레포트.",
+  "home.set": "&a홈 설정 완료!",
+  "home.deleted": "&a홈 삭제됨.",
+  "home.not_found": "&c홈 없음.",
+  "home.teleported": "&a홈으로 텔레포트.",
   "home.footer": "&3==========================================",
   "home.failed": "&c홈 텔레포트 실패.",
-
   "cooldown.active": "&c{seconds} &c초 기다리세요.",
-
   "tpall.header": "&9==========================================",
   "tpall.success": "&a모든 플레이어(&e{count}&a명) 텔레포트 완료.",
   "tpall.notify": "&e관리자 &a{player} &e님이 텔레포트했습니다.",
   "tpall.footer": "&9==========================================",
-
   "fantpa.reloaded": "&a설정 다시 불러옴.",
   "fantpa.version": "&6{name} &7v{version}",
   "fantpa.saved": "&a데이터 저장 완료.",
   "fantpa.set": "&a{key} &a= &e{value}&a.",
   "fantpa.unknown_key": "&c알 수 없는 키. 사용 가능: timeout, cooldown, delay",
-
+  "fantpa.language.set": "&a언어가 &e{language}&a(으)로 설정되었습니다.",
+  "fantpa.language.invalid": "&c유효하지 않은 언어입니다. 사용 가능: &e{languages}",
   "no_permission": "&c권한 없음.",
   "player_only": "&c플레이어만 사용 가능."
 }

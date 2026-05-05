@@ -1,11 +1,10 @@
 {
   "prefix.success": "&a[✔] &r",
   "prefix.error": "&c[✘] &r",
-
   "tpa.header": "&6==========================================",
   "tpa.sent": "&a已向 &e{player} &a發送傳送請求，等待回應...",
   "tpa.received": "&e{player} &6請求傳送到你身邊！",
-  "tpa.accept_button": "       &a[✔ 接受]       ",
+  "tpa.accept_button": "    &a[✔ 接受]    ",
   "tpa.deny_button": "&c[✘ 拒絕]",
   "tpa.button_separator": "",
   "tpa.footer": "&6==========================================",
@@ -21,39 +20,34 @@
   "tpa.player_offline": "&c該玩家不在線。",
   "tpa.self": "&c不能向自己發送請求！",
   "tpa.failed": "&c傳送失敗。",
-
   "tpahere.header": "&5==========================================",
   "tpahere.sent": "&a傳送至此請求已發送給 &e{player}&a。",
   "tpahere.received": "&e{player} &5請求你傳送到他身邊！",
   "tpahere.already_sent": "&c已向該玩家發送了待處理請求！",
   "tpahere.self": "&c不能向自己發送請求！",
-
   "back.header": "&8==========================================",
   "back.success": "&a已傳送回死亡位置。",
   "back.footer": "&8==========================================",
   "back.no_location": "&c沒有找到死亡位置。",
-
   "home.header": "&3==========================================",
-  "home.set": "&a家園 &e{home} &a設置成功！",
-  "home.deleted": "&a家園 &e{home} &a已刪除。",
-  "home.not_found": "&c家園 &e{home} &c未找到。",
-  "home.teleported": "&a已傳送到家園 &e{home}&a。",
+  "home.set": "&a家園設置成功！",
+  "home.deleted": "&a家園已刪除。",
+  "home.not_found": "&c家園未找到。",
+  "home.teleported": "&a已傳送到家園。",
   "home.footer": "&3==========================================",
   "home.failed": "&c傳送到家園失敗。",
-
   "cooldown.active": "&c請等待 &e{seconds} &c秒。",
-
   "tpall.header": "&9==========================================",
   "tpall.success": "&a所有玩家（&e{count}&a）已傳送到你身邊。",
   "tpall.notify": "&e已被管理員 &a{player} &e傳送。",
   "tpall.footer": "&9==========================================",
-
   "fantpa.reloaded": "&a設定檔和語言檔已重新載入。",
   "fantpa.version": "&6{name} &7v{version}",
   "fantpa.saved": "&a資料已儲存。",
   "fantpa.set": "&a已將 &e{key} &a設定為 &e{value}&a。",
   "fantpa.unknown_key": "&c未知設定項。可選: timeout, cooldown, delay",
-
+  "fantpa.language.set": "&a語言已設定為 &e{language}&a。",
+  "fantpa.language.invalid": "&c無效的語言。可用: &e{languages}",
   "no_permission": "&c沒有權限。",
   "player_only": "&c僅限玩家使用。"
 }

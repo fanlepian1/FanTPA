@@ -3,6 +3,7 @@ package cn.fancraft.fantpa.lang;
 import cn.fancraft.fantpa.Fantpa;
 import cn.fancraft.fantpa.config.ConfigManager;
 import cn.fancraft.fantpa.utils.LoggerUtil;
+import cn.fancraft.fantpa.utils.PlayerDataManager;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -15,8 +16,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class LangManager {
 
@@ -26,8 +26,9 @@ public class LangManager {
     private static final Type MAP_TYPE = new TypeToken<Map<String, String>>() {}.getType();
 
     private static final String[] BUILTIN_LOCALES = {
-        "en_us", "zh_cn", "ru_ru", "ja_jp", "ko_kr",
-        "fr_fr", "de_de", "es_es", "pt_br"
+        "en_us", "zh_cn", "zh_tw", "ru_ru", "ja_jp", "ko_kr",
+        "fr_fr", "de_de", "es_es", "pt_br",
+        "it_it", "pl_pl", "tr_tr", "vi_vn", "th_th", "uk_ua"
     };
 
     private final Map<String, Map<String, String>> localeMap = new HashMap<>();
@@ -40,7 +41,7 @@ public class LangManager {
         fallback = loadBuiltin(getDefaultLocale());
 
         try { Files.createDirectories(LANG_DIR); }
-        catch (IOException e) { LoggerUtil.error("无法创建语言文件目录", e); }
+        catch (IOException e) { LoggerUtil.error("Failed to create lang directory", e); }
 
         for (String locale : BUILTIN_LOCALES) {
             Path target = LANG_DIR.resolve(locale + ".json");
@@ -58,10 +59,14 @@ public class LangManager {
                     }
                 }
             }
-            LoggerUtil.info("语言文件加载完成，可用语言: " + localeMap.keySet());
+            LoggerUtil.info("Languages loaded, available: " + localeMap.keySet());
         } catch (IOException e) {
-            LoggerUtil.error("扫描语言文件目录失败", e);
+            LoggerUtil.error("Failed to scan lang directory", e);
         }
+    }
+
+    public Set<String> getAvailableLocales() {
+        return Collections.unmodifiableSet(localeMap.keySet());
     }
 
     private String getDefaultLocale() {
@@ -104,9 +109,34 @@ public class LangManager {
 
     public void reload() { loadLanguages(); }
 
+    /**
+     * Resolve player's language with priority:
+     * 1. Player's personal choice (via /fantpa language, stored in data.json)
+     * 2. Config file's defaultLanguage
+     * 3. Player's Minecraft client language
+     * 4. en_us fallback
+     */
     public static String getPlayerLocale(net.minecraft.server.level.ServerPlayer player) {
-        try { return player.clientInformation().language(); }
-        catch (Exception e) { return ConfigManager.getInstance().getConfig().defaultLanguage; }
+        // 1. Player's personal choice
+        try {
+            String personal = PlayerDataManager.getInstance().getLanguage(player.getUUID());
+            if (personal != null && !personal.isBlank()) return personal;
+        } catch (Exception ignored) {}
+
+        // 2. Config file default
+        try {
+            String configLang = ConfigManager.getInstance().getConfig().defaultLanguage;
+            if (configLang != null && !configLang.isBlank()) return configLang;
+        } catch (Exception ignored) {}
+
+        // 3. Player's client language
+        try {
+            String clientLang = player.clientInformation().language();
+            if (clientLang != null && !clientLang.isBlank()) return clientLang;
+        } catch (Exception ignored) {}
+
+        // 4. Fallback
+        return "en_us";
     }
 
     private Map<String, String> loadBuiltin(String locale) {
@@ -120,7 +150,7 @@ public class LangManager {
             Map<String, String> result = GSON.fromJson(new InputStreamReader(in, StandardCharsets.UTF_8), MAP_TYPE);
             return result != null ? result : new HashMap<>();
         } catch (IOException e) {
-            LoggerUtil.error("加载内置语言文件失败: " + path, e);
+            LoggerUtil.error("Failed to load builtin lang: " + path, e);
             return new HashMap<>();
         }
     }
