@@ -1,5 +1,6 @@
 package cn.fancraft.fantpa.command;
 
+import cn.fancraft.fantpa.utils.PlayerManager;
 import cn.fancraft.fantpa.teleport.TeleportHandler;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
@@ -17,19 +18,13 @@ public class AdminCommands {
         dispatcher.register(Commands.literal("tpall")
             .requires(src -> {
                 try {
-                    ServerPlayer player = src.getPlayer();
-                    if (player != null)
-                        return cn.fancraft.fantpa.api.PlayerManager.isPlayerOP(
-                            player.getDisplayName().getString());
-                } catch (Exception ignored) {}
-                return false;
+                    ServerPlayer p = src.getPlayer();
+                    return p != null && PlayerManager.isPlayerOP(p.getDisplayName().getString());
+                } catch (Exception ignored) { return false; }
             })
-            .executes(AdminCommands::executeTpAll));
-    }
-
-    private static int executeTpAll(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
-        ServerPlayer admin = ctx.getSource().getPlayerOrException();
-        TeleportHandler.getInstance().tpAll(admin);
-        return Command.SINGLE_SUCCESS;
+            .executes(ctx -> {
+                TeleportHandler.getInstance().tpAll(ctx.getSource().getPlayerOrException());
+                return Command.SINGLE_SUCCESS;
+            }));
     }
 }

@@ -1,6 +1,5 @@
 package cn.fancraft.fantpa.teleport;
 
-import net.minecraft.core.GlobalPos;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.UUID;

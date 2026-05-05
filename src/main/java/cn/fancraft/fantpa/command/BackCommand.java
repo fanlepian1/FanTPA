@@ -1,7 +1,6 @@
 package cn.fancraft.fantpa.command;
 
 import cn.fancraft.fantpa.config.ConfigManager;
-import cn.fancraft.fantpa.config.ConfigData;
 import cn.fancraft.fantpa.teleport.TeleportHandler;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
@@ -16,9 +15,7 @@ public class BackCommand {
     private BackCommand() {}
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        ConfigData cfg = ConfigManager.getInstance().getConfig();
-
-        if (cfg.backEnabled) {
+        if (ConfigManager.getInstance().getConfig().backEnabled) {
             dispatcher.register(Commands.literal("back")
                 .requires(src -> src.getPlayer() != null)
                 .executes(BackCommand::executeBack));
@@ -26,8 +23,7 @@ public class BackCommand {
     }
 
     private static int executeBack(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
-        ServerPlayer player = ctx.getSource().getPlayerOrException();
-        TeleportHandler.getInstance().back(player);
+        TeleportHandler.getInstance().back(ctx.getSource().getPlayerOrException());
         return Command.SINGLE_SUCCESS;
     }
 }

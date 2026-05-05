@@ -2,7 +2,6 @@ package cn.fancraft.fantpa.command;
 
 import cn.fancraft.fantpa.config.ConfigManager;
 import cn.fancraft.fantpa.config.ConfigData;
-import cn.fancraft.fantpa.message.MessageManager;
 import cn.fancraft.fantpa.teleport.TeleportHandler;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
@@ -20,43 +19,35 @@ public class HomeCommands {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         ConfigData cfg = ConfigManager.getInstance().getConfig();
 
-        if (cfg.homeEnabled) {
+        if (cfg.homeEnabled)
             dispatcher.register(Commands.literal("home")
                 .requires(src -> src.getPlayer() != null)
-                .executes(ctx -> executeHome(ctx, null))
+                .executes(ctx -> exec(ctx, null, false))
                 .then(Commands.argument("name", StringArgumentType.word())
-                    .executes(ctx -> executeHome(ctx, StringArgumentType.getString(ctx, "name")))));
-        }
+                    .executes(ctx -> exec(ctx, StringArgumentType.getString(ctx, "name"), false))));
 
-        if (cfg.sethomeEnabled) {
+        if (cfg.sethomeEnabled)
             dispatcher.register(Commands.literal("sethome")
                 .requires(src -> src.getPlayer() != null)
-                .executes(ctx -> executeSetHome(ctx, null))
+                .executes(ctx -> exec(ctx, null, true))
                 .then(Commands.argument("name", StringArgumentType.word())
-                    .executes(ctx -> executeSetHome(ctx, StringArgumentType.getString(ctx, "name")))));
-        }
+                    .executes(ctx -> exec(ctx, StringArgumentType.getString(ctx, "name"), true))));
 
-        if (cfg.delhomeEnabled) {
+        if (cfg.delhomeEnabled)
             dispatcher.register(Commands.literal("delhome")
                 .requires(src -> src.getPlayer() != null)
                 .then(Commands.argument("name", StringArgumentType.word())
-                    .executes(ctx -> executeDelHome(ctx, StringArgumentType.getString(ctx, "name")))));
-        }
+                    .executes(ctx -> delete(ctx, StringArgumentType.getString(ctx, "name")))));
     }
 
-    private static int executeHome(CommandContext<CommandSourceStack> ctx, String homeName) throws CommandSyntaxException {
+    private static int exec(CommandContext<CommandSourceStack> ctx, String name, boolean set) throws CommandSyntaxException {
         ServerPlayer player = ctx.getSource().getPlayerOrException();
-        TeleportHandler.getInstance().home(player, homeName);
+        if (set) TeleportHandler.getInstance().setHome(player, name);
+        else TeleportHandler.getInstance().home(player, name);
         return Command.SINGLE_SUCCESS;
     }
 
-    private static int executeSetHome(CommandContext<CommandSourceStack> ctx, String homeName) throws CommandSyntaxException {
-        ServerPlayer player = ctx.getSource().getPlayerOrException();
-        TeleportHandler.getInstance().setHome(player, homeName);
-        return Command.SINGLE_SUCCESS;
-    }
-
-    private static int executeDelHome(CommandContext<CommandSourceStack> ctx, String homeName) throws CommandSyntaxException {
+    private static int delete(CommandContext<CommandSourceStack> ctx, String homeName) throws CommandSyntaxException {
         ServerPlayer player = ctx.getSource().getPlayerOrException();
         TeleportHandler.getInstance().deleteHome(player, homeName);
         return Command.SINGLE_SUCCESS;
