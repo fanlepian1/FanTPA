@@ -1,4 +1,4 @@
-# FanTPA[ru_ru.json](src/main/resources/assets/fantpa/lang/ru_ru.json)
+# FanTPA
 
 一个功能强大的 Minecraft Fabric 传送模组，提供 TPA、Home、Back 等传送功能。
 
