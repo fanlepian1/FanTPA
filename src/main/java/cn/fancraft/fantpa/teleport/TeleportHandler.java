@@ -4,13 +4,15 @@ import cn.fancraft.fantpa.config.ConfigManager;
 import cn.fancraft.fantpa.event.EventManager;
 import cn.fancraft.fantpa.event.TeleportEvents;
 import cn.fancraft.fantpa.message.MessageManager;
-import cn.fancraft.fantpa.utils.LoggerUtil;
 import cn.fancraft.fantpa.utils.PlayerDataManager;
 import cn.fancraft.fantpa.utils.PlayerManager;
 import net.minecraft.core.GlobalPos;
+import net.minecraft.core.SectionPos;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ChunkResult;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.chunk.status.ChunkStatus;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -32,14 +34,39 @@ public class TeleportHandler {
 
     // ==================== Teleport ====================
 
-    private static boolean doTeleport(ServerPlayer player, ServerPlayer target) {
+    private boolean doTeleport(ServerPlayer player, ServerPlayer target) {
         return player.teleportTo((ServerLevel) target.level(),
             target.getX(), target.getY(), target.getZ(), Set.of(),
-            target.getXRot(), target.getYRot(), true);
+            target.getYRot(), target.getXRot(), true);
     }
 
-    private static boolean doTeleport(ServerPlayer player, ServerLevel level, double x, double y, double z) {
-        return player.teleportTo(level, x, y, z, Set.of(), player.getXRot(), player.getYRot(), true);
+    private boolean doTeleport(ServerPlayer player, ServerLevel level, double x, double y, double z) {
+        return player.teleportTo(level, x, y, z, Set.of(),
+            player.getYRot(), player.getXRot(), true);
+    }
+
+    /**
+     * Async chunk loading then teleport on main thread.
+     */
+    private void teleportAsync(ServerPlayer player, ServerLevel level, double x, double y, double z,
+                               Runnable onSuccess, Runnable onFail) {
+        int chunkX = SectionPos.blockToSectionCoord(x);
+        int chunkZ = SectionPos.blockToSectionCoord(z);
+
+        level.getChunkSource().getChunkFuture(chunkX, chunkZ, ChunkStatus.FULL, true)
+            .thenAccept(chunkResult -> {
+                if (chunkResult.isSuccess()) {
+                    server.execute(() -> {
+                        if (doTeleport(player, level, x, y, z)) {
+                            onSuccess.run();
+                        } else {
+                            onFail.run();
+                        }
+                    });
+                } else {
+                    server.execute(onFail);
+                }
+            });
     }
 
     // ==================== TPA ====================
@@ -90,7 +117,7 @@ public class TeleportHandler {
         MessageManager.sendSuccess(dest, "tpa.accepted_delay",
             Map.of("player", tp.getDisplayName().getString(), "seconds", String.valueOf(delay)));
 
-        scheduler.schedule(() -> {
+        scheduler.schedule(() -> server.execute(() -> {
             if (!PlayerManager.isPlayerOnline(tp.getDisplayName().getString()) ||
                 !PlayerManager.isPlayerOnline(dest.getDisplayName().getString())) {
                 MessageManager.sendError(tp, "tpa.player_offline");
@@ -107,7 +134,7 @@ public class TeleportHandler {
                 MessageManager.sendError(tp, "tpa.failed");
                 MessageManager.sendError(dest, "tpa.failed");
             }
-        }, delay, TimeUnit.SECONDS);
+        }), delay, TimeUnit.SECONDS);
         return true;
     }
 
@@ -135,14 +162,19 @@ public class TeleportHandler {
             ServerLevel level = server.getLevel(deathPos.dimension());
             if (level != null) {
                 MessageManager.send(player, "back.header");
-                if (doTeleport(player, level,
-                    deathPos.pos().getX() + 0.5, deathPos.pos().getY(), deathPos.pos().getZ() + 0.5)) {
-                    applyCooldown(player);
-                    MessageManager.sendSuccess(player, "back.success");
-                    MessageManager.send(player, "back.footer");
-                    EventManager.getInstance().fireAsync(new TeleportEvents.BackEvent(player));
-                    return true;
-                }
+                double x = deathPos.pos().getX() + 0.5, y = deathPos.pos().getY() + 0.05, z = deathPos.pos().getZ() + 0.5;
+                teleportAsync(player, level, x, y, z,
+                    () -> {
+                        applyCooldown(player);
+                        MessageManager.sendSuccess(player, "back.success");
+                        MessageManager.send(player, "back.footer");
+                        EventManager.getInstance().fireAsync(new TeleportEvents.BackEvent(player));
+                    },
+                    () -> {
+                        MessageManager.sendError(player, "home.failed");
+                        MessageManager.send(player, "back.footer");
+                    });
+                return true;
             }
         }
         MessageManager.sendError(player, "back.no_location");
@@ -186,15 +218,18 @@ public class TeleportHandler {
         if (level == null) { MessageManager.sendError(player, "home.failed"); return false; }
 
         MessageManager.send(player, "home.header");
-        if (doTeleport(player, level, pos.pos().getX() + 0.5, pos.pos().getY(), pos.pos().getZ() + 0.5)) {
-            applyCooldown(player);
-            MessageManager.sendSuccess(player, "home.teleported");
-            MessageManager.send(player, "home.footer");
-            EventManager.getInstance().fireAsync(new TeleportEvents.HomeEvent(player, "home", TeleportEvents.HomeEvent.Type.TELEPORT));
-            return true;
-        }
-        MessageManager.sendError(player, "home.failed");
-        return false;
+        teleportAsync(player, level, pos.pos().getX() + 0.5, pos.pos().getY(), pos.pos().getZ() + 0.5,
+            () -> {
+                applyCooldown(player);
+                MessageManager.sendSuccess(player, "home.teleported");
+                MessageManager.send(player, "home.footer");
+                EventManager.getInstance().fireAsync(new TeleportEvents.HomeEvent(player, "home", TeleportEvents.HomeEvent.Type.TELEPORT));
+            },
+            () -> {
+                MessageManager.sendError(player, "home.failed");
+                MessageManager.send(player, "home.footer");
+            });
+        return true;
     }
 
     // ==================== Admin ====================
@@ -239,7 +274,7 @@ public class TeleportHandler {
     }
 
     private void startTimeoutChecker() {
-        scheduler.scheduleAtFixedRate(() -> {
+        scheduler.scheduleAtFixedRate(() -> server.execute(() -> {
             int timeout = ConfigManager.getInstance().getConfig().teleportTimeout;
             var it = pendingRequests.values().iterator();
             while (it.hasNext()) {
@@ -250,6 +285,6 @@ public class TeleportHandler {
                     MessageManager.sendError(r.getTarget(), "tpa.timeout_target", Map.of("player", r.getSender().getDisplayName().getString()));
                 }
             }
-        }, 1, 1, TimeUnit.SECONDS);
+        }), 1, 1, TimeUnit.SECONDS);
     }
 }

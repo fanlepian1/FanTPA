@@ -28,10 +28,14 @@ public class TpaCommands {
         dispatcher.register(Commands.literal("tpaccept")
             .then(Commands.argument("player", StringArgumentType.word())
                 .suggests((ctx, builder) -> {
+                    String remaining = builder.getRemaining().toLowerCase();
                     if (ctx.getSource().getPlayer() != null) {
                         for (var e : TeleportHandler.getInstance().pendingRequests().entrySet())
-                            if (e.getValue().getTarget().getUUID().equals(ctx.getSource().getPlayer().getUUID()))
-                                builder.suggest(e.getValue().getSender().getDisplayName().getString());
+                            if (e.getValue().getTarget().getUUID().equals(ctx.getSource().getPlayer().getUUID())) {
+                                String name = e.getValue().getSender().getDisplayName().getString();
+                                if (name.toLowerCase().startsWith(remaining))
+                                    builder.suggest(name);
+                            }
                     }
                     return builder.buildFuture();
                 })
@@ -40,10 +44,14 @@ public class TpaCommands {
         dispatcher.register(Commands.literal("tpdeny")
             .then(Commands.argument("player", StringArgumentType.word())
                 .suggests((ctx, builder) -> {
+                    String remaining = builder.getRemaining().toLowerCase();
                     if (ctx.getSource().getPlayer() != null) {
                         for (var e : TeleportHandler.getInstance().pendingRequests().entrySet())
-                            if (e.getValue().getTarget().getUUID().equals(ctx.getSource().getPlayer().getUUID()))
-                                builder.suggest(e.getValue().getSender().getDisplayName().getString());
+                            if (e.getValue().getTarget().getUUID().equals(ctx.getSource().getPlayer().getUUID())) {
+                                String name = e.getValue().getSender().getDisplayName().getString();
+                                if (name.toLowerCase().startsWith(remaining))
+                                    builder.suggest(name);
+                            }
                     }
                     return builder.buildFuture();
                 })
@@ -55,8 +63,12 @@ public class TpaCommands {
             .requires(src -> true)
             .then(Commands.argument("player", StringArgumentType.word())
                 .suggests((ctx, builder) -> {
-                    for (var p : ctx.getSource().getServer().getPlayerList().getPlayers())
-                        builder.suggest(p.getDisplayName().getString());
+                    String remaining = builder.getRemaining().toLowerCase();
+                    for (var p : ctx.getSource().getServer().getPlayerList().getPlayers()) {
+                        String pname = p.getDisplayName().getString();
+                        if (pname.toLowerCase().startsWith(remaining))
+                            builder.suggest(pname);
+                    }
                     return builder.buildFuture();
                 })
                 .executes(ctx -> executeTpa(ctx, type))));

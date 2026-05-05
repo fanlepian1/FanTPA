@@ -1,12 +1,17 @@
 # FanTPA
 
-A powerful Minecraft Fabric teleportation mod that provides TPA, Home, Back and other teleportation features.
+A powerful Minecraft Fabric teleportation mod that provides TPA, Home, Back and other teleportation features with advanced capabilities.
 
 ---
 
 **[中文版本](README_zh.md)** | [English](README.md)
 
 ## Features
+
+### Core Features
+- **Asynchronous Chunk Loading** - Advanced async chunk loading system ensures smooth teleportation without server lag
+- **Custom Language Support** - Full support for custom translations with 17+ built-in languages
+- **High Version Compatibility** - Supports Minecraft 26.1+
 
 ### TPA Teleportation System
 | Command | Description | Permission |
@@ -33,11 +38,28 @@ A powerful Minecraft Fabric teleportation mod that provides TPA, Home, Back and 
 |---------|-------------|------------|
 | `/tpall` | Teleport all online players to your location | OP only |
 
+## Advanced Features
+
+### Asynchronous Chunk Loading
+FanTPA implements an advanced asynchronous chunk loading mechanism that:
+- Loads destination chunks in the background without blocking the main thread
+- Provides smooth teleportation experience even in remote locations
+- Prevents server lag during teleportation operations
+
+### Custom Language Support
+- 17+ built-in languages with full translation coverage
+- Easy-to-use language configuration system
+- Support for adding custom language packs
+
+### High Version Compatibility
+- Server version requirement: >= 26.1
+- Regular updates to support latest Minecraft versions
+
 ## Installation
 
 ### Server Installation
 1. Ensure your server has **Fabric Loader** and **Fabric API** installed
-2. Place `FanTPA-1.0.0.jar` into the server's `mods` folder
+2. Place `FanTPA-x.x.x.jar` into the server's `mods` folder
 3. Start the server, the mod will automatically generate config files
 
 ### Client Installation (Optional)
@@ -123,24 +145,25 @@ Built jar file will be located at `build/libs/FanTPA-1.0.0.jar`
 
 ## Supported Languages
 
-| Code | Language |
-|------|----------|
-| `zh_cn` | Chinese (Simplified) |
+| Code    | Language              |
+|---------|-----------------------|
+| `zh_cn` | Chinese (Simplified)  |
 | `zh_tw` | Chinese (Traditional) |
-| `en_us` | English |
-| `de_de` | German |
-| `es_es` | Spanish |
-| `fr_fr` | French |
-| `ja_jp` | Japanese |
-| `ko_kr` | Korean |
-| `pt_br` | Portuguese (Brazil) |
-| `ru_ru` | Russian |
-| `it_it` | Italian |
-| `pl_pl` | Polish |
-| `tr_tr` | Turkish |
-| `th_th` | Thai |
-| `vi_vn` | Vietnamese |
-| `uk_ua` | Ukrainian |
+| `en_us` | English               |
+| `de_de` | German                |
+| `es_es` | Spanish               |
+| `fr_fr` | French                |
+| `ja_jp` | Japanese              |
+| `ko_kr` | Korean                |
+| `lzh`   | Chinese (Literary)    |
+| `pt_br` | Portuguese (Brazil)   |
+| `ru_ru` | Russian               |
+| `it_it` | Italian               |
+| `pl_pl` | Polish                |
+| `tr_tr` | Turkish               |
+| `th_th` | Thai                  |
+| `vi_vn` | Vietnamese            |
+| `uk_ua` | Ukrainian             |
 
 ## Event System
 
@@ -160,6 +183,7 @@ The mod provides rich events for other mods to listen:
 - **Mod ID**: `fantpa`
 - **Version**: 1.0.0
 - **Minecraft Version**: 1.20.1+
+- **Server Version Requirement**: >= 26.1
 - **Dependency**: Fabric API
 
 ## License
